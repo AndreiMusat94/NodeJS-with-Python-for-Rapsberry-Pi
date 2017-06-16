@@ -1,0 +1,73 @@
+$(function () {
+    var output = document.querySelectorAll('output')[0];
+    $(document).ready(function(){
+      output.innerHTML = 0 + "%";
+    });
+    $(document).on('change', 'input[type="range"]', function (e) {
+        output.innerHTML = 100 - e.currentTarget.value + "%";
+        $('#hiddenSlider').val(output.innerHTML.substring(0,output.innerHTML.length-1));        
+        var lengthValue = parseInt($('#hiddenSlider').val())*42;
+        var uri = "http://localhost:8080/manual-blinds/"+lengthValue;
+       		$.ajax({
+					url: uri,
+					type: 'GET',
+					success:function() {
+					 console.log(uri);
+					}
+				});
+    });
+    $('input[type=range]').rangeslider({
+        polyfill: false
+    });
+  //CUSTOM LOGIC
+  $("#cmn-toggle-1").on("change", function (event) { //Automatic
+          if ($(this).is(":checked")) {
+              automaticDisable();
+          }else{
+              automaticEnable();
+          }
+      });
+  $("#cmn-toggle-2").on("change", function (event) { //Manual
+          if ($(this).is(":checked")) {
+            manualDisable();
+            $.ajax({
+                url:"http://localhost:8080/closed-blinds",
+                type:"GET",           
+                success:function() {
+                  console.log("succes");
+                }
+              });
+          }else{
+            manualEnable();
+             $.ajax({
+                url:"http://localhost:8080/open-blinds",
+                type:"GET",               
+                success:function() {
+                  console.log("succes");
+                }
+              });
+          }
+      });
+      function automaticDisable(){
+        $('#cmn-toggle-2').attr('disabled', true);
+        $("label[for='cmn-toggle-2']").css("opacity",0.4);
+        $('.label2').css("opacity",1);
+        $('.rangeslider').addClass('rangeslider--disabled');
+      }
+      function automaticEnable(){
+        $('#cmn-toggle-2').attr('disabled', false);
+        $('.rangeslider').removeClass('rangeslider--disabled');
+        $("label[for='cmn-toggle-2']").css("opacity",1);
+      }
+      function manualDisable(){
+    //  $('#cmn-toggle-1').attr('disabled', true);
+    //  $("label[for='cmn-toggle-1']").css("opacity",0.4);
+        $('.label1').css("opacity",1);
+        $('input[type="range"]').val(0).change()
+      }
+      function manualEnable(){
+    //  $('#cmn-toggle-1').attr('disabled', false);
+    //  $("label[for='cmn-toggle-1']").css("opacity",1);
+        $('input[type="range"]').val(100).change()
+      }
+});

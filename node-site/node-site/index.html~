@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Home Page</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+		<link rel="stylesheet" href="/css/styles.css">
+	   <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
+	   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	  	<link rel="stylesheet" href="/css/rangeslider2.css" />
+   	<script src="/javascript/rangeslider.min.js"></script>
+		<script src="/javascript/project_javascript.js"></script>
+	</head>
+	<body>
+		<header>
+			<nav class="navbar navbar-inverse">
+				<a href="/" class="navbar-brand">Window blinders</a>
+				<ul class="nav navbar-nav">
+					<li><a href="/">Home</a></li>
+					<li><a href="/about">About</a></li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<div class="container">
+				<div class="switch">
+					<label for="cmn-toggle-1" class="label1"><h2>Automatic control mode</h2></label>
+					<input id="cmn-toggle-1" class="cmn-toggle cmn-toggle-round" type="checkbox">
+		  		<label for="cmn-toggle-1"></label>
+				</div>
+			</div>
+			<div class="container">
+				<div class="switch">
+					<label for="cmn-toggle-2" class="label2"><h2>Open / Closed blinds</h2></label>
+					<input id="cmn-toggle-2" class="cmn-toggle cmn-toggle-round" type="checkbox">
+					<label for="cmn-toggle-2"><label>
+				</div>
+			</div>
+			<div class="container vertical-slider">
+				  <label><h2>Manual control mode</h2></label>
+					<div class="range">
+		  			<input type="range" id="slider" min="0" max="100" value="100" data-orientation="vertical">
+						<output></output>
+					</div>
+				</div>
+				<input type="hidden" id="hiddenSlider">
+		</main>
+		<br/><br/>
+		<footer>
+			Automated and remote Blinds Software. Copyright &copy; Andrei Musat, 2017
+		</footer>
+	</body>
+</html>
